@@ -80,6 +80,11 @@ public abstract class AbstractExporterMojo extends AbstractMojo {
     private boolean testClasspath;
 
     /**
+     * @parameter default-value=false
+     */
+    private boolean skip;
+
+    /**
      * @component
      */
     private BuildContext buildContext;
@@ -92,7 +97,7 @@ public abstract class AbstractExporterMojo extends AbstractMojo {
         } else {
             project.addCompileSourceRoot(targetFolder.getAbsolutePath());
         }
-        if (!hasSourceChanges()) {
+        if (skip || !hasSourceChanges()) {
             // Only run if something has changed on the source dirs. This will
             // avoid m2e entering on a infinite build.
             return;
@@ -192,6 +197,10 @@ public abstract class AbstractExporterMojo extends AbstractMojo {
 
     public void setTestClasspath(boolean testClasspath) {
         this.testClasspath = testClasspath;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
     }
 
     public void setBuildContext(BuildContext buildContext) {
