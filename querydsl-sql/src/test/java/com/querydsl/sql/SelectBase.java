@@ -2062,7 +2062,7 @@ public class SelectBase extends AbstractBaseTest {
 
     private OrderSpecifier<?>[] groupConcatOrder() {
         if (Connections.getTarget() == Target.POSTGRESQL) {
-            return new OrderSpecifier[] {employee.id.asc()};
+            return new OrderSpecifier<?>[] {employee.id.asc()};
         } else {
             return new OrderSpecifier<?>[0];
         }
